@@ -1,24 +1,21 @@
-import logo from './logo.svg';
-import './App.css';
+import { FormWrapper } from './compoments/form-wrapper/formWrapper';
+import { mockApi } from './mock-api/mock-api';
+import { useEffect, useState } from 'react';
 
 function App() {
+
+  const [data, setData] = useState({
+    towers: [],
+    floors: []
+  });
+
+  useEffect(() => {
+    Promise.all([mockApi.getTowers(),  mockApi.getFloors()])
+      .then(([towers, floors]) => setData({ towers, floors }))
+  }, [])
+  
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <FormWrapper towers={data.towers} floors={data.floors} ></FormWrapper>
   );
 }
 
