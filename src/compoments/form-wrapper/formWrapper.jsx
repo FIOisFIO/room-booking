@@ -1,9 +1,10 @@
-import { Button, Container, FormControl, InputLabel, MenuItem, Select, TextField } from "@mui/material"
+import { Box, Button, Container, FormControl, InputLabel, MenuItem, Select, TextField } from "@mui/material"
 import { DatePicker, LocalizationProvider } from '@mui/x-date-pickers';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs'
 import { useState } from "react";
 import { TimePicker } from '@mui/x-date-pickers/TimePicker';
 import RoomSelector from "../room-selector/roomSelector";
+
 
 export function FormWrapper({ towers, floors }) {
 
@@ -44,16 +45,8 @@ export function FormWrapper({ towers, floors }) {
 
     return (
         <LocalizationProvider dateAdapter={AdapterDayjs}>
-            <Container sx={{
-                display: 'flex',
-                width: '30vw',
-                flexDirection: 'column',
-                margin: 'auto',
-                padding: '10px',
-                height: '450px',
-                justifyContent: 'space-between'
-            }}>
-                <FormControl>
+            <Container className="form-wrapper-container">
+                <FormControl className="custom-input">
                     <InputLabel id='tower-select-label'>Башня</InputLabel>
                     <Select
                         id='tower-select'
@@ -69,7 +62,7 @@ export function FormWrapper({ towers, floors }) {
                     </Select>
                 </FormControl>
 
-                <FormControl>
+                <FormControl className="custom-input">
                     <InputLabel id='floor-select-label'>Этаж</InputLabel>
                     <Select
                         id='floor-select'
@@ -85,24 +78,34 @@ export function FormWrapper({ towers, floors }) {
                     </Select>
                 </FormControl>
 
-                <RoomSelector tower={tower} floor={floor} room={room} setRoom={setRoom}></RoomSelector>
+                <RoomSelector tower={tower} floor={floor} room={room} setRoom={setRoom} className="custom-input">
+                </RoomSelector>
 
 
                 <DatePicker
                     label="Дата"
                     value={date}
                     onChange={(newValue) => setDate(newValue)}
+                    className="custom-input"
 
                 />
 
-                <TimePicker label="Время" value={time} onChange={(newValue) => setTime(newValue)} />
+                <TimePicker label="Время" value={time} onChange={(newValue) => setTime(newValue)} className="custom-input"/>
+                <div>
+                    <TextField placeholder={'комментарий'} value={comment} onChange={commentChange} variant="outlined" multiline className="custom-input" />
+                </div>
 
-                <TextField placeholder={'комментарий'} value={comment} onChange={commentChange} variant="standard" />
-
-                <Container>
+                <Box sx={{
+                    display: 'flex',
+                    justifyContent: 'space-between',
+                    alignItems: 'center',
+                    padding: '0px',
+                    width: '200px',
+                    height: '50px',
+                }}>
                     <Button onClick={clearForm}>Очистить</Button>
                     <Button onClick={dateToJSON}>Отправить</Button>
-                </Container>
+                </Box>
 
 
             </Container>

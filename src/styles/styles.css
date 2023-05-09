@@ -1,0 +1,12 @@
+.custom-input {
+    width: 200px;
+    margin: 10px;
+}
+div.form-wrapper-container {
+    display: flex;
+    gap: 10px;
+    justify-content: space-between;
+    flex-direction: column;
+    width: 30vw;
+    height: 100%;
+}
