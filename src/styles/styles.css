@@ -6,7 +6,8 @@ div.form-wrapper-container {
     display: flex;
     gap: 10px;
     justify-content: space-between;
+    align-items: center;
     flex-direction: column;
-    width: 30vw;
+    width: 50vw;
     height: 100%;
 }
